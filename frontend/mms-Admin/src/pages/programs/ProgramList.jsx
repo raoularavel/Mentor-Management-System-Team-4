@@ -1,6 +1,5 @@
-import { Box, Stack } from '@mui/material'
-import ProgramItem from './ProgramItem'
 import TabView from 'src/components/tabs/TabView'
+import ProgramItem from './ProgramItem'
 import ProgramItemView from './ProgramItemView'
 
 export default function ProgramList() {

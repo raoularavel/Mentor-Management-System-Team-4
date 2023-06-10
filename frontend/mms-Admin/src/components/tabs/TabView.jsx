@@ -23,6 +23,7 @@ function TabView({ tabs, orientation = "horizontal" }) {
 }
 
 TabView.propTypes = {
+    orientation: PropTypes.string,
     tabs: PropTypes.arrayOf(PropTypes.objectOf({
         name: PropTypes.node,
         component: PropTypes.node.isRequired
