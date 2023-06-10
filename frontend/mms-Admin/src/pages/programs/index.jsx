@@ -1,10 +1,10 @@
+import CreateProgram from "./CreateProgram";
 import ProgramItemView from "./ProgramItemView";
-import ProgramList from "./ProgramList";
 import ViewProgram from "./ViewProgram";
 
 export default {
     path: "programs",
-    children:[
+    children: [
         {
             index: true,
             element: <ViewProgram />
@@ -18,6 +18,11 @@ export default {
                     element: <ProgramItemView />
                 }
             ]
+        },
+
+        {
+            path: "create",
+            element: <CreateProgram />
         }
     ]
 }

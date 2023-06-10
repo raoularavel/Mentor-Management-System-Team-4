@@ -30,7 +30,7 @@ export default function ViewProgram() {
             </Grid>
             <Grid item xs={2}>
                 <Stack direction="row" justifyContent="flex-end">
-                    <Button sx={{ float: "right", m: 2, px: 4 }} >Create New Program</Button>
+                    <Button sx={{ float: "right", m: 2, px: 4 }} onClick={() => navigate(`/programs/create`)}>Create New Program</Button>
                 </Stack>
                 <Outlet />
             </Grid>
