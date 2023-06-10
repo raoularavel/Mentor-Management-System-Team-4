@@ -1,16 +1,11 @@
-import CertificateList from "./CertificateList";
-import ViewCertificate from "./ViewCertificate";
+import Sample from "./Sample";
 
 export default {
     path: "certificates",
-    children:[
+    children: [
         {
             index: true,
-            element: <CertificateList />
+            element: <Sample />
         },
-        {
-            path: ":id/view",
-            element: <ViewCertificate />
-        }
     ]
 }

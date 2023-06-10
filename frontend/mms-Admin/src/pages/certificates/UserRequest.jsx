@@ -1,5 +1,5 @@
 import { ExpandCircleDownOutlined } from '@mui/icons-material'
-import { Avatar, Chip, ListItem, ListItemAvatar, ListItemText, Stack, alpha } from '@mui/material'
+import { Accordion, AccordionSummary, Avatar, Chip, ListItem, ListItemAvatar, ListItemText, Stack, alpha } from '@mui/material'
 import PropTypes from "prop-types"
 import { MentorImage } from 'src/components/icons'
 import { usePalette } from 'src/theme/theme'
