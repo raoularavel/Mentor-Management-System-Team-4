@@ -3,7 +3,7 @@ import { Avatar, Chip, ListItem, ListItemAvatar, ListItemText, Stack, alpha } fr
 import { MentorImage } from 'src/components/icons'
 import { usePalette } from 'src/theme/theme'
 
-export default function UserRequest({ expanded }) {
+function UserRequest({ expanded }) {
     const palette = usePalette()
     return (
         <Accordion expanded={expanded} sx={{ border: 1, borderColor: "#E6E6E6", borderRadius: 2 }}>
@@ -30,3 +30,12 @@ export default function UserRequest({ expanded }) {
         </Accordion>
     )
 }
+
+
+
+
+UserRequest.propTypes = {
+    expanded: PropTypes.bool
+}
+
+export default UserRequest
