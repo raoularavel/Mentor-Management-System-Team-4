@@ -11,6 +11,7 @@ import Report from "../../../src/assets/images/reports.svg";
 import Task from "../../../src/assets/images/task.svg";
 import { drawerWidth, usePalette } from "../../theme/theme";
 import MenuItem from "./MenuItem";
+import { Widgets } from "@mui/icons-material";
 function Sidebar() {
   const palette = usePalette();
   const location = useLocation();
@@ -72,6 +73,7 @@ function Sidebar() {
             active={location.pathname === "/"}
           />
           <MenuItem path="/tasks" name="Tasks" icon={<img src={Task} />} />
+          <MenuItem path="/programs" name="Programs" icon={<Widgets color="secondary" />} />
           <MenuItem path="/reports" name="Reports" icon={<img src={Report} />} />
           <MenuItem
             path="/mentors"

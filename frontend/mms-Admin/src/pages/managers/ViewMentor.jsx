@@ -16,14 +16,14 @@ export default function ViewMentor() {
                             color={"common.black"}
                             fontWeight={"bold"}
                             fontSize={24}
-                        >Mentors</Typography>
+                        >Mentor Managers</Typography>
                         <Box sx={{ flexGrow: 1 }} />
                         <Search />
                         <FilterList />
                     </Stack>
                     {
                         (new Array(100)).fill(0).map((v, index) => (
-                            <Box onClick={() => navigate(`/mentors/${index}/view`)} key={index} >
+                            <Box onClick={() => navigate(`/mentor-manager/${index}/view`)} key={index} >
                                 <MentorCardView />
                             </Box>))
                     }

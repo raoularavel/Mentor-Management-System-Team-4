@@ -15,14 +15,14 @@ export default function ViewProgram() {
                             color={"common.black"}
                             fontWeight={"bold"}
                             fontSize={24}
-                        >Programs</Typography>
+                        >Tasks</Typography>
                         <Box sx={{ flexGrow: 1 }} />
                         <Search />
                         <FilterList />
                     </Stack>
                     {
                         (new Array(100)).fill(0).map((v, index) => (
-                            <Box onClick={() => navigate(`/programs/${index}/view`)} key={index} >
+                            <Box onClick={() => navigate(`/tasks/${index}/view`)} key={index} >
                                 <ProgramItem />
                             </Box>))
                     }
@@ -30,7 +30,7 @@ export default function ViewProgram() {
             </Grid>
             <Grid item xs={2}>
                 <Stack direction="row" justifyContent="flex-end">
-                    <Button sx={{ float: "right", m: 2, px: 4 }} >Create New Program</Button>
+                    <Button sx={{ float: "right", m: 2, px: 4 }} onClick={() => navigate(`/tasks/create`)} >Create New Task</Button>
                 </Stack>
                 <Outlet />
             </Grid>

@@ -1,4 +1,5 @@
-import ProgramList from "./Sample";
+import ProgramItemView from "./ProgramItemView";
+import ProgramList from "./ProgramList";
 import ViewProgram from "./ViewProgram";
 
 export default {
@@ -6,11 +7,17 @@ export default {
     children:[
         {
             index: true,
-            element: <ProgramList />
+            element: <ViewProgram />
         },
         {
             path: ":id/view",
-            element: <ViewProgram />
+            element: <ViewProgram />,
+            children: [
+                {
+                    index: true,
+                    element: <ProgramItemView />
+                }
+            ]
         }
     ]
 }
