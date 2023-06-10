@@ -1,15 +1,15 @@
 import { Button, Grid, Stack, Typography } from '@mui/material'
-import { Outlet } from 'react-router'
 import { MentorManager, MentorRequest, ProgramRequest } from 'src/components/icons'
 import CategoryItem from './CategoryItem'
 import UserCardView from './UserCardView'
+import UserRequest from './UserRequest'
 
-export default function ViewApproval() {
+export default function CertificateList() {
     return (
-        <Grid container columns={3} spacing={2}>
+        <Grid container columns={3}>
             <Grid item xs={1}>
                 <Typography
-                    sx={{ fontSize: 20, fontWeight: "bold", color: "common.black", pb: 2 }}
+                    sx={{ fontSize: 20, fontWeight: "bold", color: "common.black" }}
                 >Category</Typography>
                 <Stack spacing={1}>
                     <CategoryItem
@@ -53,14 +53,31 @@ export default function ViewApproval() {
                 </Stack>
             </Grid>
             <Grid item xs={2}>
-                <Stack direction="row" justifyContent="space-between" py={2}>
+                <Stack direction="row" justifyContent="space-between">
                     <Typography
                         sx={{ fontSize: 20, fontWeight: "bold", color: "common.black" }}
                     >Mentor Manager Requests</Typography>
                     <Button>Add New Mentor Manager</Button>
                 </Stack>
-                <Stack spacing={1} sx={{ maxHeight: "80vh", overflow: "scroll" }}>
-                    <Outlet />
+                <Stack spacing={1}>
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
+                    <UserRequest />
                 </Stack>
             </Grid>
         </Grid>

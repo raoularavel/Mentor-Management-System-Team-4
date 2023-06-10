@@ -1,4 +1,4 @@
-import CertificateList from "./Sample";
+import CertificateList from "./CertificateList";
 import ViewCertificate from "./ViewCertificate";
 
 export default {
