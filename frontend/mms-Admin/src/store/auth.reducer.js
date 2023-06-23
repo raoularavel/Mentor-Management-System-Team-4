@@ -43,6 +43,18 @@ const authReducer = createSlice({
         }
         return currentState;
       })
+      .addMatcher(authservice.endpoints.changePassword.matchFulfilled, (state, { payload }) => {
+        let currentState = state;
+        if (payload.success) {
+          currentState.data.has_change_password = true;
+          Cookies.set(userCookie, JSON.stringify(currentState), {
+            expires: defaultCookieExpires,
+            domain: window.location.hostname,
+            path: '/',
+          });
+        }
+        return currentState;
+      })
       .addMatcher(authservice.endpoints.logout.matchFulfilled, (state) => {
         Cookies.remove(userCookie, {
           domain: window.location.hostname,

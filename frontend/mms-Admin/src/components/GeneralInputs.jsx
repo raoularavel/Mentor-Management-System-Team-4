@@ -103,7 +103,7 @@ function GeneralInputs() {
   return (
     <form onSubmit={handleSubmit}>
       <Formik initialValues={initialValues}>
-        <Stack direction={"column"} spacing={2} sx={{ width: "100%" }}>
+        <Stack spacing={1} sx={{ width: "100%" }}>
           <Form label="Full Name">
             <Stack
               direction={"row"}
@@ -111,7 +111,7 @@ function GeneralInputs() {
               sx={{ display: "flex", width: "100%" }}
             >
               <Stack
-                direction={"column"}
+                
                 sx={{ display: "flex", width: "100%" }}
               >
                 <TextField

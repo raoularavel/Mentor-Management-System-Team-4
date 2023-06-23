@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Toolbar, Typography } from '@mui/material';
 import GeneralInputs from 'src/components/GeneralInputs';
 import { useLogoutMutation } from 'src/services/auth.service';
 
@@ -11,7 +11,7 @@ export default function EditProfile() {
         navigate('/login');
     }
     return (
-        <Box sx={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+        <Box sx={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex", py: 2 }}>
             <Stack spacing={2.5}>
                 <Stack justifyContent="space-between" direction="row">
                 <Typography sx={{
