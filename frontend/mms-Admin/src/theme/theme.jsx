@@ -285,7 +285,7 @@ const theme = createTheme({
 });
 
 export const usePalette = () => useTheme().palette;
-export const drawerWidth = 260;
+export const drawerWidth = 250;
 
 console.log(createTheme());
 export default theme;

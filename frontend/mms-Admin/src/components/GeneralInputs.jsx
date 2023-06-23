@@ -2,6 +2,7 @@ import {
   Autocomplete,
   Box,
   Button,
+  Checkbox,
   Stack,
   TextField,
   Typography,
@@ -13,18 +14,27 @@ import { countries } from "../pages/settings/countries";
 // import CustomInput from "./forms/inputs/CustomInput";
 import GeneralSocialInputs from "./GeneralSocialInputs";
 import PropTypes from "prop-types";
+import { useUpdateProfileMutation } from "src/services/user.service";
+import { useAuth } from "src/store/auth.reducer";
+import { toast } from "react-toastify";
+import { pick } from "src/utils/helper";
 
 const GeneralInputSchema = Yup.object().shape({
-  firstname: Yup.string().required("First name is required"),
-  lastname: Yup.string().required("Last name is required"),
-  about: Yup.string().max(200, "Maximum 200 characters allowed"),
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  bio: Yup.string().required(),
   website: Yup.string().url("Invalid URL"),
-  country: Yup.string(),
+  country: Yup.string().required(),
   city: Yup.string().required("City is required"),
-  github: Yup.string().url("Invalid URL"),
-  instagram: Yup.string().url("Invalid URL"),
-  linkedin: Yup.string().url("Invalid URL"),
-  twitter: Yup.string().url("Invalid URL"),
+  gitHub: Yup.string().nullable().default(),
+  instagram: Yup.string().nullable().default(),
+  linkedIn: Yup.string().nullable().default(),
+  twitter: Yup.string().nullable().default(),
+  technical_proficiency: Yup.string().required(),
+  previous_programs: Yup.string().required(),
+  program_interest: Yup.string().required(),
+  mentor_before: Yup.boolean().required(),
+  years_of_experience: Yup.number().required(),
 });
 
 const Form = ({ label, children }) => (
@@ -59,24 +69,20 @@ Form.propTypes = {
   label: PropTypes.string,
 };
 
-function GeneralInputs() {
-  const initialValues = {
-    firstname: "",
-    lastname: "",
-    about: "",
-    website: "",
-    country: "",
-    city: "",
-    github: "",
-    instagram: "",
-    linkedin: "",
-    twitter: "",
-  };
 
-  const onSubmit = (values, action) => {
-    console.log(values);
-    console.log(action);
-    action.resetForm();
+function GeneralInputs() {
+
+  const [updateProfile] = useUpdateProfileMutation()
+
+  const auth = useAuth()
+
+  const initialValues = { ...auth.data };
+
+  const onSubmit = async (values) => {
+    const res = await updateProfile({ ...pick(values, Object.keys(GeneralInputSchema.getDefault())), user_id: auth.data.user_id }).unwrap()
+    if (res.success) {
+      toast.success("Profile updated successfully!")
+    }
   };
 
   const {
@@ -94,11 +100,10 @@ function GeneralInputs() {
     onSubmit,
     enableReinitialize: true,
   });
-  //   console.log(values);
   return (
     <form onSubmit={handleSubmit}>
       <Formik initialValues={initialValues}>
-        <Stack direction={"column"} spacing={3} sx={{ width: "100%" }}>
+        <Stack direction={"column"} spacing={2} sx={{ width: "100%" }}>
           <Form label="Full Name">
             <Stack
               direction={"row"}
@@ -110,13 +115,13 @@ function GeneralInputs() {
                 sx={{ display: "flex", width: "100%" }}
               >
                 <TextField
-                  name="firstname"
+                  name="firstName"
                   onChange={handleChange}
-                  value={values.firstname}
+                  value={values.firstName}
                   type="text"
                   label="First Name"
-                  error={touched.firstname && Boolean(errors.firstname)}
-                  helperText={touched.firstname && errors.firstname}
+                  error={touched.firstName && Boolean(errors.firstName)}
+                  helperText={touched.firstName && errors.firstName}
                 />
               </Stack>
 
@@ -125,27 +130,27 @@ function GeneralInputs() {
                 sx={{ display: "flex", width: "100%" }}
               >
                 <TextField
-                  name="lastname"
+                  name="lastName"
                   type="text"
                   label="Last Name"
                   onChange={handleChange}
-                  value={values.lastname}
-                  error={touched.lastname && Boolean(errors.lastname)}
-                  helperText={touched.lastname && errors.lastname}
+                  value={values.lastName}
+                  error={touched.lastName && Boolean(errors.lastName)}
+                  helperText={touched.lastName && errors.lastName}
                 />
               </Stack>
             </Stack>
           </Form>
           <Form label="About">
             <TextField
-              name="about"
+              name="bio"
               label="Your Bio"
               multiline
               rows={4}
-              value={values.about}
+              value={values.bio}
               onChange={handleChange}
-              error={touched.about && Boolean(errors.about)}
-              helperText={touched.about && errors.about}
+              error={touched.bio && Boolean(errors.bio)}
+              helperText={touched.bio && errors.bio}
               sx={{ width: "100%" }}
             />
           </Form>
@@ -157,6 +162,61 @@ function GeneralInputs() {
               onChange={handleChange}
               error={touched.website && Boolean(errors.website)}
               helperText={touched.website && errors.website}
+              sx={{ width: "100%" }}
+            />
+          </Form>
+          <Form label="Technical Proficiency">
+            <TextField
+              name="technical_proficiency"
+              label="www.example.com"
+              value={values.technical_proficiency}
+              onChange={handleChange}
+              error={touched.technical_proficiency && Boolean(errors.technical_proficiency)}
+              helperText={touched.technical_proficiency && errors.technical_proficiency}
+              sx={{ width: "100%" }}
+            />
+          </Form>
+          <Form label="Previous Programs">
+            <TextField
+              name="previous_programs"
+              label="Previous Programs"
+              value={values.previous_programs}
+              onChange={handleChange}
+              error={touched.previous_programs && Boolean(errors.previous_programs)}
+              helperText={touched.previous_programs && errors.previous_programs}
+              sx={{ width: "100%" }}
+            />
+          </Form>
+          <Form label="Program Interest">
+            <TextField
+              name="program_interest"
+              label="Program Interest"
+              value={values.program_interest}
+              onChange={handleChange}
+              error={touched.program_interest && Boolean(errors.program_interest)}
+              helperText={touched.program_interest && errors.program_interest}
+              sx={{ width: "100%" }}
+            />
+          </Form>
+          <Form label="Mentor Before">
+            <Checkbox
+              name="mentor_before"
+              label="Mentor Before"
+              checked={values.mentor_before}
+              onChange={handleChange}
+              error={touched.mentor_before && Boolean(errors.mentor_before)}
+              helperText={touched.mentor_before && errors.mentor_before}
+            />
+          </Form>
+          <Form label="Years of experience">
+            <TextField
+              name="years_of_experience"
+              label="Years of experience"
+              type="number"
+              value={values.years_of_experience}
+              onChange={handleChange}
+              error={touched.years_of_experience && Boolean(errors.years_of_experience)}
+              helperText={touched.years_of_experience && errors.years_of_experience}
               sx={{ width: "100%" }}
             />
           </Form>
@@ -188,10 +248,9 @@ function GeneralInputs() {
                   {({ field }) => (
                     <Autocomplete
                       {...field}
-                      id="country-select-demo"
                       options={countries}
                       onChange={(event, value) =>
-                        setFieldValue(field.name, value)
+                        setFieldValue(field.name, value.code)
                       }
                       autoHighlight
                       getOptionLabel={(option) => option.label || ""}
@@ -217,7 +276,7 @@ function GeneralInputs() {
                           label="Select country"
                           inputProps={{
                             ...params.inputProps,
-                            autoComplete: "new-password", // disable autocomplete and autofill
+                            autoComplete: "false", // disable autocomplete and autofill
                           }}
                         />
                       )}
@@ -274,6 +333,7 @@ function GeneralInputs() {
             setFieldValue={setFieldValue}
             getFieldValue={getFieldValue}
           />
+
 
           <Stack
             direction={"row"}

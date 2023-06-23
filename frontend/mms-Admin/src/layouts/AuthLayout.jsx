@@ -1,12 +1,10 @@
-import React from "react";
 import { Box, Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import { usePalette } from "../theme/theme";
 import AuthLogoAndText from "../components/AuthLogoAndText";
+import { usePalette } from "../theme/theme";
 
 export default function AuthLayout() {
   const palette = usePalette();
-  console.log(palette.primary.main);
   return (
     <Box
       sx={{

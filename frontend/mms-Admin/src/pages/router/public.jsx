@@ -5,7 +5,7 @@ import CommonRouter from "./common";
 const AuthLayout = lazy(() => import("../../layouts/AuthLayout"));
 const Login = lazy(() => import("../auth/LoginForm"));
 const ForgetPassword = lazy(() => import("../auth/ForgotPasswordForm"));
-const ResetPasswordForm = lazy(() => import("../auth/ResetPasswordForm"));
+const ResetPasswordForm = lazy(() => import("../auth/ResetPasswordForm2"));
 
 const PublicRouter = () => {
   const navigate = useNavigate();

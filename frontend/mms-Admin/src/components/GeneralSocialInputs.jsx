@@ -87,12 +87,12 @@ function GeneralSocialInputs({ errors, touched, values, handleChange }) {
                 </Stack>
 
                 <TextField
-                  name="github"
-                  label="@githubuser"
-                  value={values.github}
+                  name="gitHub"
+                  label="@github"
+                  value={values.gitHub}
                   onChange={handleChange}
-                  error={touched.github && Boolean(errors.github)}
-                  helperText={touched.github && errors.github}
+                  error={touched.gitHub && Boolean(errors.gitHub)}
+                  helperText={touched.gitHub && errors.gitHub}
                   fullWidth
                   sx={{ borderRadius: 0 }}
                 />
@@ -139,12 +139,12 @@ function GeneralSocialInputs({ errors, touched, values, handleChange }) {
                 </Stack>
 
                 <TextField
-                  name="linkedin"
+                  name="linkedIn"
                   label="@linkedinuser"
-                  value={values.linkedin}
+                  value={values.linkedIn}
                   onChange={handleChange}
-                  error={touched.linkedin && Boolean(errors.linkedin)}
-                  helperText={touched.linkedin && errors.linkedin}
+                  error={touched.linkedIn && Boolean(errors.linkedIn)}
+                  helperText={touched.linkedIn && errors.linkedIn}
                   fullWidth
                   sx={{ borderRadius: 0 }}
                 />

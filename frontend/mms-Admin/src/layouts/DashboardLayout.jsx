@@ -1,12 +1,13 @@
-import React from "react";
 import { Box, Toolbar, useTheme } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
 
-import { drawerWidth } from "../theme/theme";
-import Topbar from "../components/dashboard/Topbar";
-import Sidebar from "../components/dashboard/Sidebar";
 import axios from "axios";
+import ChangePasswordForm from "src/pages/auth/ChangePasswordForm";
+import EditProfile from "src/pages/profile/EditProfile";
 import { useAuth } from "src/store/auth.reducer";
+import Sidebar from "../components/dashboard/Sidebar";
+import Topbar from "../components/dashboard/Topbar";
+import { drawerWidth } from "../theme/theme";
 
 export default function DashboardLayout() {
   const theme = useTheme();
@@ -17,6 +18,10 @@ export default function DashboardLayout() {
 
      axios.defaults.headers.common.Authorization = `Bearer ${auth.token}`;
      axios.defaults.headers["x-access-token"] = auth.token
+
+     if(!auth.data.has_change_password) return <ChangePasswordForm />
+
+     if(!auth.data.has_fill_profile) return <EditProfile />
 
   return (
     <Box sx={{ display: "flex", height: "100%" }}>

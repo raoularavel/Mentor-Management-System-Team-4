@@ -16,9 +16,10 @@ import {
   Stack,
   TextField,
   InputAdornment,
+  Menu,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Menu, Person } from "@mui/icons-material";
+import { Menu as MenuIcon, Person } from "@mui/icons-material";
 import { useLogoutMutation } from "src/services/auth.service";
 import { useAuth } from "src/store/auth.reducer";
 
@@ -27,7 +28,7 @@ export default function AppHeader() {
   const [logout] = useLogoutMutation();
   const auth = useAuth()
 
-  const handleLogout = async ()=>await logout(auth?.user?.email)
+  const handleLogout = async ()=>await logout(auth?.data?.user_id)
 
   const navigate = useNavigate();
   const palette = usePalette();
@@ -36,6 +37,7 @@ export default function AppHeader() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
+    console.log(event.currentTarget)
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -78,7 +80,7 @@ export default function AppHeader() {
                 aria-label="menu"
                 sx={{ mr: 2, display: ["block", "block", "none"] }}
               >
-                <Menu />
+                <MenuIcon />
               </IconButton>
 
               <Stack

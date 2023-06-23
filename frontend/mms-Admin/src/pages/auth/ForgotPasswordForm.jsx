@@ -1,21 +1,26 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import { useFormik } from "formik";
-import * as Yup from "yup"
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import Loader from "src/components/Loader";
 import { useForgotPasswordMutation } from "src/services/auth.service";
 import { usePalette } from "src/theme/theme";
-import { useState } from "react";
+import * as Yup from "yup";
 
 function ForgotPasswordForm() {
   const palette = usePalette();
+  const navigate = useNavigate()
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
-
-  const [isReset, setReset] = useState(false)
 
   const onSubmit = async (values) => {
     const rest = await forgotPassword(values).unwrap();
-    console.log(rest);
-    if(rest.success) setReset(true);
+    if (rest.success) {
+      axios.defaults.headers.common.Authorization = `Bearer ${rest.passToken}`;
+      axios.defaults.headers["x-access-token"] = rest.passToken
+      toast.success(rest.message)
+      navigate("/reset-password", { replace: true })
+    }
   }
 
   const formik = useFormik({
@@ -64,38 +69,17 @@ function ForgotPasswordForm() {
               color: palette.secondary.main,
             }}
           >
-            {isReset
-              ? "   An email has been sent to your registered email."
-              : "Please enter your registered email to reset your password."}
+            Please enter your registered email to reset your password.
           </Typography>
 
-          {isReset ? (
-            <>
-              <Typography
-                variant="h2"
-                sx={{
-                  fontSize: "24px",
-                  fontWeight: 400,
-                  lineHeight: "40px",
-                  fontFamily: "Mukta",
-                  color: palette.secondary.main,
-                }}
-              >
-                Follow the link to reset your password.
-              </Typography>
-            </>
-          ) : (
-            <>
-              <TextField
-                required
-                name="email"
-                onChange={formik.handleChange}
-                label="Enter your email"
-                type="email"
-                fullWidth
-              />
-            </>
-          )}
+          <TextField
+            required
+            name="email"
+            onChange={formik.handleChange}
+            label="Enter your email"
+            type="email"
+            fullWidth
+          />
         </Stack>
         <Button
           disabled={!formik.isValid}
@@ -104,7 +88,7 @@ function ForgotPasswordForm() {
           fullWidth
           sx={{ p: 1 }}
         >
-          {!isReset ? "Reset Password" : "DONE"}
+          Send Reset Password Code
         </Button>
       </Stack>
     </form>

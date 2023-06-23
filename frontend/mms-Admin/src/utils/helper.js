@@ -21,3 +21,30 @@ export const useIsMobile = (customWidth) => {
 
   return isMobile;
 };
+
+
+export function transformRequest(obj) {
+  return Object.fromEntries(
+    Object.entries(obj)
+      .filter(([, value]) => value != null)
+      .map(([key, value]) => [
+        key,
+        value === Object(value) ? transformRequest(value) : value,
+      ]),
+  );
+}
+
+export const pick = (obj, keys) => Object.fromEntries(
+  keys
+  .filter(key => key in obj)
+  .map(key => [key, obj[key]])
+);
+
+export const inclusivePick = (obj, ...keys) => Object.fromEntries(
+  keys.map(key => [key, obj[key]])
+);
+
+export const omit = (obj, ...keys) => Object.fromEntries(
+  Object.entries(obj)
+  .filter(([key]) => !keys.includes(key))
+);

@@ -7,7 +7,7 @@ export default function CertificateList() {
   return (
     <Stack spacing={1} sx={{ maxHeight: 800, overflowY: "scroll" }}>
       {
-        (new Array(50)).fill(0).map((v, index) => (
+        (new Array(10)).fill(0).map((v, index) => (
           <Box key={index} onClick={() => setExpanded(index)}>
             <CertificateItem
               expanded={index === expanded}

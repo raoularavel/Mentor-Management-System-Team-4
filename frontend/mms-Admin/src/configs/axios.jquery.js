@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { userCookie } from './app';
+import { transformRequest } from "src/utils/helper"
 
 const axiosBaseQuery = (
   { baseUrl } = { baseUrl: '' }) => async ({ url, method, data, params }) => {
@@ -9,7 +10,7 @@ const axiosBaseQuery = (
     const result = await axios({
       url: baseUrl + url,
       method,
-      data,
+      data: transformRequest(data),
       params,
       headers: {
         Accept: 'application/json',

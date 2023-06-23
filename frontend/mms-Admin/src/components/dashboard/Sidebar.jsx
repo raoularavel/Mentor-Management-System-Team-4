@@ -12,9 +12,13 @@ import Task from "../../../src/assets/images/task.svg";
 import { drawerWidth, usePalette } from "../../theme/theme";
 import MenuItem from "./MenuItem";
 import { Widgets } from "@mui/icons-material";
+import { useAuth } from "src/store/auth.reducer";
 function Sidebar() {
   const palette = usePalette();
   const location = useLocation();
+  const { data: { firstName, user_role } } = useAuth()
+
+  const role = user_role.split('-').map(name=>`${name.charAt(0).toUpperCase()}${name.slice(1)}`).join(' ')
 
   return (
     <Box
@@ -38,13 +42,13 @@ function Sidebar() {
         <Toolbar />
         <Stack
           direction="column"
-          sx={{ alignItems: "center", justifyContent: "center"}}
+          sx={{ alignItems: "center", justifyContent: "center" }}
         >
 
           <ListItemText
-            primary='Hi Kabiru'
+            primary={firstName}
             primaryTypographyProps={{ sx: { fontWeight: "bold", fontSize: 24, color: "common.black" } }}
-            secondary='Admin'
+            secondary={role}
             secondaryTypographyProps={{ sx: { fontWeight: "bold", fontSize: 18 } }}
           />
 

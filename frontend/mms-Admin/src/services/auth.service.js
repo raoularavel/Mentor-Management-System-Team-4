@@ -9,13 +9,13 @@ const auth = api.injectEndpoints({
       query: (userId) => ({ url: '/auth/logout', method: 'POST', data: { userId } }),
     }),
     resetPassword: builder.mutation({
-      query: (data) => ({ url: '/auth/password-reset', method: 'POST', data }),
+      query: (data) => ({ url: '/auth/reset', method: 'POST', data }),
     }),
     forgotPassword: builder.mutation({
       query: ( data) => ({ url: '/auth/forgot', method: 'POST', data }),
     }),
     changePassword: builder.mutation({
-      query: (data) => ({ url: '/auth/password/change', method: 'POST', data }),
+      query: (data) => ({ url: '/auth/password/change', method: 'PUT', data }),
     }),
   }),
 });

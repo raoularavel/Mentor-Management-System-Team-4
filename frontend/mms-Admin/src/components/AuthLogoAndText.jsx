@@ -1,6 +1,6 @@
 import React from "react";
-import Logo from "../assets/images/Logo-Onley-3.svg";
 import { Stack, Typography } from "@mui/material";
+import { Logo } from "./icons";
 function AuthLogoAndText() {
   return (
     <Stack
