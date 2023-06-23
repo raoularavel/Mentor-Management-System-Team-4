@@ -70,7 +70,7 @@ const createUser = async (body, transaction) => {
 
     await sendEmail(
       user.email,
-      'Mentor Manager System Account',
+      'Mentor Manager System',
       `
     Dear ${user_role.charAt(0).toUpperCase() + user_role.slice(1)},
     Welcome to JOIN MMS.
@@ -204,7 +204,7 @@ const requestPasswordReset = async (req, res) => {
     date.setDate(date.getDate() + 1);
 
     await User.update(
-      { reset_password_code: passcode },
+      { reset_password_code: passcode, has_change_password: false },
       {
         where: { email },
       }
@@ -248,6 +248,15 @@ const changePassword = async (req, res) => {
 
     // if valid previous password, update the password
     await updateCredential({ hashed_password: newPassword }, id);
+
+    await User.update(
+      {
+        has_change_password: true
+      },
+      {
+        where: { user_id: id },
+      }
+    );
 
     return res.status(200).json({
       success: true,
@@ -305,7 +314,10 @@ const resetPassword = async (req, res) => {
     await updateCredential({ hashed_password: newPassword }, user.user_id);
 
     await User.update(
-      { reset_password_code: null },
+      {
+        reset_password_code: null,
+        has_change_password: true
+      },
       {
         where: { user_id: user.user_id },
       }
