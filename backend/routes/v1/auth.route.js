@@ -10,6 +10,7 @@ const { createUser, login, forgotPassword, resetPassword, changePassword } = aut
 
 router.post('/user/create', verifyToken, validate(authValidation.createUser), createUser);
 router.post('/login', validate(authValidation.login), login);
+router.post('/logout', verifyToken, (req, res) => res.status(200).send());
 router.post('/forgot', validate(authValidation.forgotPassword), forgotPassword);
 router.post('/reset', validate(authValidation.resetPassword), resetPassword);
 router.put('/password/change', verifyToken, validate(authValidation.changePassword), changePassword);

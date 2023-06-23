@@ -1,4 +1,4 @@
-const prod = true
+const prod = false
 
 export const serverHost = prod ? 'https://mms-team4.onrender.com' : 'http://127.0.0.1:3000';
 

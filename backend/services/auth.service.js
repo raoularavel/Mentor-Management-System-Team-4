@@ -73,15 +73,15 @@ const createUser = async (body, transaction) => {
       'Mentor Manager System Account',
       `
     Dear ${user_role.charAt(0).toUpperCase() + user_role.slice(1)},
-    Welcome to join MMS.
+    Welcome to JOIN MMS.
     Kindly find below your credentials:
-    login:  ${user.email}
-    password: ${password}
+    Login:  ${user.email}
+    Password: ${password}
     MMS URL: ${config.client_url}
     Kindly change your password and update your profile.
-  
-    Best Regards,
-    MMS Account Manager
+
+    Regards,
+    MMS Care
   
     `
     );

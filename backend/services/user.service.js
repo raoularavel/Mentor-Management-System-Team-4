@@ -39,7 +39,7 @@ const updateProfile = async (body, user_id) => {
     }
   );
 
-  return user;
+  return user[1];
 };
 
 /**
